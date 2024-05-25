@@ -77,8 +77,7 @@ def es_fecha_valida(fecha_str):#utiliza datetime para fijarse que sea una fecha 
             return False 
 
 def verificar_tipo_socio(tipo):#porque no funciona de entrada?
-        tipo=tipo
-        while tipo != 1 and tipo != 2:
+        while int(tipo) != 1 and int(tipo) != 2:
             print('El valor ingresado no es correcto, elige la opción 1 o 2.')
             tipo=int(input('tipo de socio: '))
 
@@ -181,7 +180,3 @@ def verificar_datos_consulta(nombre_especialidad,arrayespecialidad, nombre_medic
     #            especialidad_existe = True
     #    if especialidad_existe == False:
     #        print("ERROR: la especialidad no existe")
-if __name__=='__main__':
-    especialidades=['dermatologia']
-    especialidad=input()
-    verificar_especialidad(especialidad, especialidades)

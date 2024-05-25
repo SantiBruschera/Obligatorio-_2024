@@ -66,7 +66,7 @@ class Policlinica():
                     num_celular=input('numero de ceulular: ')
                     verificar_celular(num_celular)
                     tipo=input('tipo de socio, bonificado(1) o no bonificado(2)')
-                    verificar_tipo_socio(tipo)#no funciona de entrada,2 porque?
+                    verificar_tipo_socio(tipo)
                     s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo)
                     Policlinica.socio.append(s)
 
