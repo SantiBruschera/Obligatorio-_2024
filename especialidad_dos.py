@@ -13,4 +13,3 @@ class Especialidad():
     
     def set_precio(self, precio_nuevo):
         self.__precio=precio_nuevo
-        
