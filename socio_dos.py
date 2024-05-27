@@ -21,7 +21,7 @@ class Socio(Persona):
     @property
     def get_deuda(self):
         return self.__deuda
-
-if __name__=='__main__':
-    s=Socio('s','a',1,1,1,1,1)
-    s.verificar_datos_socio()
+    
+    @property
+    def get_nombre(self):
+        return self.__nombre

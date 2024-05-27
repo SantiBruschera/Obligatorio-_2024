@@ -37,5 +37,5 @@ class ConsultaMedica():
 #recolecto los datos, una vez que este todo ok, lo agrego sumo al cantidad de pacientes 
 # lista especiales. nombre == especialidad
 
-#
+#chequear que haya capaciad
     

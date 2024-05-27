@@ -7,4 +7,7 @@ class Medico(Persona):
     @property 
     def get_especialidad(self):
         return self.__especialidad
-# if __name__=='__main__':
+    
+    @property 
+    def get_nombre(self):
+        return self.__nombre
