@@ -1,6 +1,3 @@
-from medico_dos import Medico
-from socio_dos import Socio
-
 class ConsultaMedica():
     def __init__(self, nombre_especialidad, nombre_medico, fecha_consulta, cant_pacientes):
         self.__nombre_medico = nombre_medico
@@ -17,7 +14,7 @@ class ConsultaMedica():
         return self.__nombre_especialidad
     
     @property
-    def get_fecha_consuulta(self):
+    def get_fecha_consulta(self):
         return self.__fecha_consulta
     
     @property
@@ -38,4 +35,3 @@ class ConsultaMedica():
 # lista especiales. nombre == especialidad
 
 #chequear que haya capaciad
-    
