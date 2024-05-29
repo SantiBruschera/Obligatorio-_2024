@@ -19,7 +19,10 @@ from utiles import verificar_medico
 from utiles import verificar_nombre_medico
 from utiles import verificar_especialidad
 from utiles import verificar_nombre_especialidad
-from utiles import verificar_especialidad_1
+from utiles import mostrar_lista_consultas_de_especialidad
+from utiles import buscar_consultas_de_especialidades
+# from utiles import mostrar_consultas
+
 
 class Policlinica():
     def __init__(self, nombre): #los arrayssiempre tienen que ir como constructores, dentro del init. Tenemos que hacerles getters y setters. Arreglar lo que nos dijo flor de que escribiamos mal los getters y setters. Y hacer lo de socios bonificados y no bonificados. 
@@ -57,7 +60,7 @@ class Policlinica():
                     verificar_nombre_especialidad(especialidad)
                     precio = input('Precio: ')
                     verificar_precio(precio)
-                    e=Especialidad(especialidad, precio)#porque no me reconoce el precio a la primera?
+                    e=Especialidad(especialidad, precio)
                     self.especialidades.append(e)
 
                 elif opcion == 2:
@@ -100,32 +103,55 @@ class Policlinica():
                     nombre_especialidad = input('Ingrese la especialidad: ')
                     verificar_nombre_especialidad(nombre_especialidad)
                     verificar_especialidad(nombre_especialidad, self.especialidades)
-
                     nombre_medico = input('Ingrese el nombre del médico: ')      
                     verificar_nombre_medico(nombre_medico)                      
                     verificar_medico(nombre_medico, self.medicos, self.especialidades)             
-
                     fecha_consulta = input('Ingrese la fecha de consulta (aaaa-mm-dd): ')
                     verificar_fecha_consulta(fecha_consulta)
                     cant_pacientes = input('Ingrese la cantidad de pacientes que se atenderán: ')
                     verificar_cantidad_max(cant_pacientes)
                     consulta = ConsultaMedica(nombre_especialidad, nombre_medico, fecha_consulta, cant_pacientes)
-                    Policlinica.consultas.append(consulta)
-                    print(f"Consulta médica registrada: {consulta}") #esto es para verificar ahora
-                    break
+                    self.consultas.append(consulta)
 
 
                 elif opcion == 5:
                     especialidad=str(input('Ingrese la especialidad'))
                     verificar_nombre_especialidad(especialidad)
-                    verificar_especialidad_1(especialidad, self.especialidades)
-                    for consulta in self.consultas:
-                        if consulta.get_nombre_especialidad==especialidad:
-                            print('Doctor: '+ consulta.get_nombre_medico + 'Día de la consulta: ' + consulta.get_fecha_consulta)
-                            #porque no funcionan los getters
-                    opcion=input('Seleccione la opción deseada')
+                    verificar_especialidad(especialidad, self.especialidades)
+                    # mostrar_consultas(especialidad, self.consultas)
+                    buscar_consultas_de_especialidades(especialidad, self.consultas)
+                    mostrar_lista_consultas_de_especialidad(self.consultas, self.especialidades)
+                    
+
+
+                    # for consulta in self.consultas:
+                    #     if consulta.get_nombre_especialidad==especialidad:
+                    #         print('Doctor: '+ consulta.get_nombre_medico + 'Día de la consulta: ' + consulta.get_fecha_consulta)
+                    # opcion=input('Seleccione la opción deseada')
                     #imprimir los numeros disponibles y hacer un input para el usuario
                     #preguntar por la logica de esta parte, de donde salen las opciones, donde defino el maximo de opciones
+
+
+
+
+
+
+
+
+
+
+
+
+                    # especialidad=str(input('Ingrese la especialidad'))
+                    # verificar_nombre_especialidad(especialidad)
+                    # verificar_especialidad(especialidad, self.especialidades)
+                    # for consulta in self.consultas:
+                    #     if consulta.get_nombre_especialidad==especialidad:
+                    #         print('Doctor: '+ consulta.get_nombre_medico + 'Día de la consulta: ' + consulta.get_fecha_consulta)
+                    #         #porque no funcionan los getters
+                    # opcion=input('Seleccione la opción deseada')
+                    # #imprimir los numeros disponibles y hacer un input para el usuario
+                    # #preguntar por la logica de esta parte, de donde salen las opciones, donde defino el maximo de opciones
 
                 elif opcion == 6:#verificar porque no funcionan los getters
                     while True:#definir deudas

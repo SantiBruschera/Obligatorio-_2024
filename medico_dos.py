@@ -7,7 +7,3 @@ class Medico(Persona):
     @property 
     def get_especialidad(self):
         return self.__especialidad
-    
-    @property 
-    def get_nombre(self):
-        return self.__nombre
