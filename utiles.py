@@ -1,6 +1,59 @@
 from datetime import datetime
 from especialidad_dos import Especialidad
 from medico_dos import Medico
+from consulta_medica import ConsultaMedica
+from socio_dos import Socio
+from persona_dos import Persona
+
+def agregar_deuda(cedula, especialidad_1, especialidades, socios):
+    for socio in socios:
+        if socio.get_cedula==cedula:
+            for especialidad in especialidades:
+                if especialidad.especialidad==especialidad_1:
+                    #llega hasta aca u me da error 
+                    socio.get_deuda+=int(especialidad.get_precio)
+                    print(socio.get_deuda)
+
+def verificar_cedula_in_socio(cedula, socios):
+    for socio in socios:
+        if cedula not in socio.get_cedula:
+            print('entro 2')
+            opcion=0
+            while opcion not in [1,2]:
+                opcion=input('Este socio no está dado de alta, elija una opción:\n'
+                '- 1 - Volver a ingresar el socio \n'
+                '- 2 - Dar de alta el socio')
+                if opcion==1:
+                    cedula=input("socio: ")
+                elif opcion==2:
+                    nombre=input('nombre: ')
+                    verificar_nombre(nombre)
+                    apellido=input('apellido: ')
+                    verificar_apellido(apellido)
+                    cedula=input('cedula: ')
+                    verificar_cedula(cedula)
+                    fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
+                    verificar_fecha_nac(fecha_nac)
+                    fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
+                    verificar_fecha_ing(fecha_ing)
+                    num_celular=input('numero de ceulular: ')
+                    verificar_celular(num_celular)
+                    tipo=input('tipo de socio, bonificado(1) o no bonificado(2)')
+                    verificar_tipo_socio(tipo)
+                    s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo)
+                    socios.append(s)
+
+
+
+
+
+def mostrar_consultas(consultas, especialidad):
+    contador = 1
+    for consulta in consultas:
+        if consulta.get_nombre_especialidad == especialidad:
+            print(f"{contador}.Doctor: {consulta.get_nombre_medico}  Dia de la consulta: {consulta.get_fecha_consulta}")
+            contador += 1
+
 
 def verificar_cantidad_max(cantidad_max):
     while True:
@@ -195,11 +248,3 @@ def mostrar_lista_consultas_de_especialidad(consultas, especialidades):
         consultas_de_especialidad_particular = buscar_consultas_de_especialidades(especialidad, consultas)
         for i in range(len(consultas)):
             print(str(i) + 'Doctor: '+ consultas_de_especialidad_particular.nombre_medico + 'Día de la consulta: ' + consultas_de_especialidad_particular.get_fecha_consulta)
-
-
-
-def mostrar_consultas(especialidad, consultas):
-    print('funciono')
-    for consulta in consultas:
-        if consulta.get_nombre_especialidad == especialidad:
-            print(consulta.get_nombre_medico + consulta.get_fecha_consulta)

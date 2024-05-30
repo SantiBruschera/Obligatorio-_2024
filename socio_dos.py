@@ -1,8 +1,8 @@
 from persona_dos import Persona 
 class Socio(Persona):
-    def __init__(self, nombre, apellido, cedula, fecha_nac, fecha_ing, celular, tipo):
+    def __init__(self, nombre, apellido, cedula, fecha_nac, fecha_ing, celular, tipo, deuda=0):
         self.__tipo=tipo
-        self.__deuda=0
+        self.__deuda=deuda
         super().__init__(nombre, apellido, cedula, fecha_nac, fecha_ing, celular)
         self.__nombre=nombre
         self.__apellido=apellido
@@ -21,6 +21,9 @@ class Socio(Persona):
     @property
     def get_deuda(self):
         return self.__deuda
+    
+    def set_deuda(self, deuda_nueva):
+        self.__deuda==deuda_nueva
     
     @property
     def get_nombre(self):

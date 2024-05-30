@@ -19,8 +19,9 @@ from utiles import verificar_medico
 from utiles import verificar_nombre_medico
 from utiles import verificar_especialidad
 from utiles import verificar_nombre_especialidad
-from utiles import mostrar_lista_consultas_de_especialidad
-from utiles import buscar_consultas_de_especialidades
+from utiles import mostrar_consultas
+from utiles import verificar_cedula_in_socio
+from utiles import agregar_deuda
 # from utiles import mostrar_consultas
 
 
@@ -28,7 +29,7 @@ class Policlinica():
     def __init__(self, nombre): #los arrayssiempre tienen que ir como constructores, dentro del init. Tenemos que hacerles getters y setters. Arreglar lo que nos dijo flor de que escribiamos mal los getters y setters. Y hacer lo de socios bonificados y no bonificados. 
         self.__nombre = nombre
         self.medicos = [] #le saque lo oculto para que funcione otra cosa
-        self.socio = [] 
+        self.socios = [] 
         self.especialidades = []
         self.consultas = []
     
@@ -78,8 +79,8 @@ class Policlinica():
                     verificar_celular(num_celular)
                     tipo=input('tipo de socio, bonificado(1) o no bonificado(2)')
                     verificar_tipo_socio(tipo)
-                    s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo)
-                    self.socio.append(s)
+                    s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo, 0)
+                    self.socios.append(s)
 
                 elif opcion == 3:
                     nombre=input('nombre: ')
@@ -115,43 +116,15 @@ class Policlinica():
 
 
                 elif opcion == 5:
-                    especialidad=str(input('Ingrese la especialidad'))
+                    especialidad=str(input('Ingrese la especialidad: '))
                     verificar_nombre_especialidad(especialidad)
                     verificar_especialidad(especialidad, self.especialidades)
-                    # mostrar_consultas(especialidad, self.consultas)
-                    buscar_consultas_de_especialidades(especialidad, self.consultas)
-                    mostrar_lista_consultas_de_especialidad(self.consultas, self.especialidades)
-                    
-
-
-                    # for consulta in self.consultas:
-                    #     if consulta.get_nombre_especialidad==especialidad:
-                    #         print('Doctor: '+ consulta.get_nombre_medico + 'Día de la consulta: ' + consulta.get_fecha_consulta)
-                    # opcion=input('Seleccione la opción deseada')
-                    #imprimir los numeros disponibles y hacer un input para el usuario
-                    #preguntar por la logica de esta parte, de donde salen las opciones, donde defino el maximo de opciones
-
-
-
-
-
-
-
-
-
-
-
-
-                    # especialidad=str(input('Ingrese la especialidad'))
-                    # verificar_nombre_especialidad(especialidad)
-                    # verificar_especialidad(especialidad, self.especialidades)
-                    # for consulta in self.consultas:
-                    #     if consulta.get_nombre_especialidad==especialidad:
-                    #         print('Doctor: '+ consulta.get_nombre_medico + 'Día de la consulta: ' + consulta.get_fecha_consulta)
-                    #         #porque no funcionan los getters
-                    # opcion=input('Seleccione la opción deseada')
-                    # #imprimir los numeros disponibles y hacer un input para el usuario
-                    # #preguntar por la logica de esta parte, de donde salen las opciones, donde defino el maximo de opciones
+                    mostrar_consultas(self.consultas, especialidad)
+                    #como seria la logica del numero?
+                    cedula=input('Ingrese cédula de identidad del socio: ')
+                    verificar_cedula(cedula)
+                    verificar_cedula_in_socio(cedula, self.socios)
+                    agregar_deuda(cedula, especialidad, self.especialidades, self.socios)
 
                 elif opcion == 6:#verificar porque no funcionan los getters
                     while True:#definir deudas
@@ -169,13 +142,15 @@ class Policlinica():
                             for medico in self.medicos:
                                 if medico.get_especialidad==especialidad_especifica:
                                     print(medico.get_nombre)
+                                    break
                         elif int(opcion_6)==2:
                             especialidad_especifica=input('especialidad especifica: ')
                             verificar_nombre_especialidad(especialidad_especifica)
                             verificar_especialidad(especialidad_especifica, self.especialidades)
                             for especialidad in self.especialidades:
-                                if especialidad.get_especialidad==especialidad_especifica:#no funcionan los getters
+                                if especialidad.especialidad==especialidad_especifica:
                                     print(especialidad.get_precio)
+                                    break
                         elif int(opcion_6)==3:
                             pass
                         elif int(opcion_6)==4:
