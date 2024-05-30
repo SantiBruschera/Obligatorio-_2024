@@ -10,9 +10,13 @@ def agregar_deuda(cedula, especialidad_1, especialidades, socios):
         if socio.get_cedula==cedula:
             for especialidad in especialidades:
                 if especialidad.especialidad==especialidad_1:
-                    #llega hasta aca u me da error 
-                    socio.get_deuda+=int(especialidad.get_precio)
-                    print(socio.get_deuda)
+                    if socio.get_tipo==1:
+                        especialidad.get_precio=especialidad.get_precio*0.8
+                        socio.set_deuda(especialidad.get_precio)
+                        print(socio.get_deuda)
+                    else:
+                        socio.set_deuda(especialidad.get_precio)
+                        print(socio.get_deuda)
 
 def verificar_cedula_in_socio(cedula, socios):
     for socio in socios:

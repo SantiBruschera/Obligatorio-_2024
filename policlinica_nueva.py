@@ -125,6 +125,7 @@ class Policlinica():
                     verificar_cedula(cedula)
                     verificar_cedula_in_socio(cedula, self.socios)
                     agregar_deuda(cedula, especialidad, self.especialidades, self.socios)
+                    #agregar descuento dependiendo del tipo de socio
 
                 elif opcion == 6:#verificar porque no funcionan los getters
                     while True:#definir deudas

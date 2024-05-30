@@ -16,7 +16,7 @@ class Socio(Persona):
         return self.__tipo
     
     def set_tipo(self, tipo_nuevo):
-        self.__tipo=tipo_nuevo
+        self.__tipo+=tipo_nuevo
     
     @property
     def get_deuda(self):
