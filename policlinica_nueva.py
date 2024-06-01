@@ -22,13 +22,14 @@ from utiles import verificar_nombre_especialidad
 from utiles import mostrar_consultas
 from utiles import verificar_cedula_in_socio
 from utiles import agregar_deuda
+from utiles import mostrar_deuda_ordenada
 # from utiles import mostrar_consultas
 
 
 class Policlinica():
     def __init__(self, nombre): #los arrayssiempre tienen que ir como constructores, dentro del init. Tenemos que hacerles getters y setters. Arreglar lo que nos dijo flor de que escribiamos mal los getters y setters. Y hacer lo de socios bonificados y no bonificados. 
         self.__nombre = nombre
-        self.medicos = [] #le saque lo oculto para que funcione otra cosa
+        self.medicos = [] 
         self.socios = [] 
         self.especialidades = []
         self.consultas = []
@@ -63,6 +64,8 @@ class Policlinica():
                     verificar_precio(precio)
                     e=Especialidad(especialidad, precio)
                     self.especialidades.append(e)
+                    for especialidad in self.especialidades:
+                        print(especialidad.especialidad)
 
                 elif opcion == 2:
                     nombre=input('nombre: ')
@@ -81,6 +84,8 @@ class Policlinica():
                     verificar_tipo_socio(tipo)
                     s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo, 0)
                     self.socios.append(s)
+                    for socio in self.socios:
+                        print (socio.get_nombre)
 
                 elif opcion == 3:
                     nombre=input('nombre: ')
@@ -99,6 +104,9 @@ class Policlinica():
                     verificar_especialidad(especialidad,self.especialidades)
                     m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
                     self.medicos.append(m)
+                    for medico in self.medicos:
+                        print(medico.get_nombre)
+                        print(medico.get_especialidad)
 
                 elif opcion == 4:
                     nombre_especialidad = input('Ingrese la especialidad: ')
@@ -121,6 +129,7 @@ class Policlinica():
                     verificar_especialidad(especialidad, self.especialidades)
                     mostrar_consultas(self.consultas, especialidad)
                     #como seria la logica del numero?
+                    numero=input('Seleccione la opción deseada')
                     cedula=input('Ingrese cédula de identidad del socio: ')
                     verificar_cedula(cedula)
                     verificar_cedula_in_socio(cedula, self.socios)
@@ -153,8 +162,8 @@ class Policlinica():
                                     print(especialidad.get_precio)
                                     break
                         elif int(opcion_6)==3:
-                            pass
-                        elif int(opcion_6)==4:
+                            mostrar_deuda_ordenada(self.socios)
+                        elif int(opcion_6)==4:#como se comparan fechas?
                             fecha_inicio=input('fecha inicio: ')
                             verificar_fecha(fecha_inicio)
                             fecha_final=input('fecha_final: ')

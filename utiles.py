@@ -5,6 +5,15 @@ from consulta_medica import ConsultaMedica
 from socio_dos import Socio
 from persona_dos import Persona
 
+
+
+def mostrar_deuda_ordenada(socios):
+    lista=[]
+    for socio in socios:
+        lista.append(socio.get_deuda)
+    lista.sort()
+    for socio in socios:
+        print(f' Socio {socio.get_cedula} deuda {socio.get_deuda}')
 def agregar_deuda(cedula, especialidad_1, especialidades, socios):
     for socio in socios:
         if socio.get_cedula==cedula:
@@ -52,11 +61,11 @@ def verificar_cedula_in_socio(cedula, socios):
 
 
 def mostrar_consultas(consultas, especialidad):
-    contador = 1
     for consulta in consultas:
         if consulta.get_nombre_especialidad == especialidad:
-            print(f"{contador}.Doctor: {consulta.get_nombre_medico}  Dia de la consulta: {consulta.get_fecha_consulta}")
-            contador += 1
+            n=1
+            print(f"{n}. Doctor: {consulta.get_nombre_medico}  Dia de la consulta: {consulta.get_fecha_consulta}")
+            n+=1
 
 
 def verificar_cantidad_max(cantidad_max):
@@ -179,7 +188,7 @@ def verificar_especialidad(especialidad, especialidades):
         except ValueError:
             print("Por favor, ingrese un número válido.")
 
-def verificar_medico(medico, medicos, especialidades):
+def verificar_medico(medico, medicos, especialidades):#como hacer que nombre y apellido pasen a ser una sola variable
     while medico not in medicos:
         try:
             opcion = int(input(': Este medico no está dado de alta. Elija una opción:\n'
