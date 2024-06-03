@@ -6,7 +6,6 @@ from socio_dos import Socio
 from persona_dos import Persona
 
 
-
 def mostrar_deuda_ordenada(socios):
     lista=[]
     for socio in socios:
@@ -61,11 +60,28 @@ def verificar_cedula_in_socio(cedula, socios):
 
 
 def mostrar_consultas(consultas, especialidad):
+    lista=[]
     for consulta in consultas:
         if consulta.get_nombre_especialidad == especialidad:
             n=1
-            print(f"{n}. Doctor: {consulta.get_nombre_medico}  Dia de la consulta: {consulta.get_fecha_consulta}")
+            print(f"{n} - Doctor:{consulta.get_nombre_medico}  Dia de la consulta: {consulta.get_fecha_consulta}")
+            lista.append(n, consulta.get_nombre_medico, consulta.get_fecha_consulta)
             n+=1
+    return lista
+
+
+def elegir_consulta(opcion, consultas, especialidad):
+        for i in range(len(mostrar_consultas(consultas, especialidad))):
+            if i == opcion:
+                mostrar_consultas(consultas, especialidad)[i][0].pop()
+                for consulta in consultas:
+                    if consulta.get_especialidad==especialidad and opcion==mostrar_consultas(consultas, especialidad)[0][i]:
+                        return consulta.get_cant_pacientes
+            else:
+                opcion=input('No es un número de consulta válido, los números válidos son: 1, 4, 5 y 7')
+
+
+
 
 
 def verificar_cantidad_max(cantidad_max):
@@ -188,39 +204,42 @@ def verificar_especialidad(especialidad, especialidades):
         except ValueError:
             print("Por favor, ingrese un número válido.")
 
-def verificar_medico(medico, medicos, especialidades):#como hacer que nombre y apellido pasen a ser una sola variable
-    while medico not in medicos:
-        try:
-            opcion = int(input(': Este medico no está dado de alta. Elija una opción:\n'
-                            '1 - Volver a ingresar el medico\n'
-                            '2 - Dar de alta el medico '))
-            while opcion not in [1, 2]:
-                print('La opción no es correcta')
+def verificar_medico(medico_i, medicos, especialidades):#como hacer que nombre y apellido pasen a ser una sola variable
+    for medico in medicos:
+        if medico.get_nombre+" "+medico.get_apellido==medico_i:
+            break
+        else:
+            try:
                 opcion = int(input(': Este medico no está dado de alta. Elija una opción:\n'
-                            '1 - Volver a ingresar el medico\n'
-                            '2 - Dar de alta el medico '))
-            if opcion == 1:
-                medico = input('Medico: ')
-            elif opcion == 2:
-                nombre=input('nombre: ')
-                verificar_nombre(nombre)
-                apellido=input('apellido: ')
-                verificar_apellido(apellido)
-                cedula=input('cedula: ')
-                verificar_cedula(cedula)
-                fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
-                verificar_fecha_nac(fecha_nac)
-                fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
-                verificar_fecha_ing(fecha_ing)
-                num_celular=input('numero de ceulular: ')
-                verificar_celular(num_celular)
-                especialidad=input('especialidad: ')
-                verificar_especialidad(especialidad, especialidades)
-                m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
-                medicos.append(m)
-                break
-        except ValueError:
-            print("Por favor, ingrese un número válido.")
+                                '1 - Volver a ingresar el medico\n'
+                                '2 - Dar de alta el medico '))
+                while opcion not in [1, 2]:
+                    print('La opción no es correcta')
+                    opcion = int(input(': Este medico no está dado de alta. Elija una opción:\n'
+                                '1 - Volver a ingresar el medico\n'
+                                '2 - Dar de alta el medico '))
+                if opcion == 1:
+                    medico = input('Medico: ')
+                elif opcion == 2:
+                    nombre=input('nombre: ')
+                    verificar_nombre(nombre)
+                    apellido=input('apellido: ')
+                    verificar_apellido(apellido)
+                    cedula=input('cedula: ')
+                    verificar_cedula(cedula)
+                    fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
+                    verificar_fecha_nac(fecha_nac)
+                    fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
+                    verificar_fecha_ing(fecha_ing)
+                    num_celular=input('numero de ceulular: ')
+                    verificar_celular(num_celular)
+                    especialidad=input('especialidad: ')
+                    verificar_especialidad(especialidad, especialidades)
+                    m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
+                    medicos.append(m)
+                    break
+            except ValueError:
+                print("Por favor, ingrese un número válido.")
 
 def buscar_consulta(especialidad, consultas):
     for consulta in consultas:

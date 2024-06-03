@@ -23,6 +23,7 @@ from utiles import mostrar_consultas
 from utiles import verificar_cedula_in_socio
 from utiles import agregar_deuda
 from utiles import mostrar_deuda_ordenada
+from utiles import elegir_consulta
 # from utiles import mostrar_consultas
 
 
@@ -86,7 +87,6 @@ class Policlinica():
                     self.socios.append(s)
                     for socio in self.socios:
                         print (socio.get_nombre)
-
                 elif opcion == 3:
                     nombre=input('nombre: ')
                     verificar_nombre(nombre)
@@ -127,9 +127,10 @@ class Policlinica():
                     especialidad=str(input('Ingrese la especialidad: '))
                     verificar_nombre_especialidad(especialidad)
                     verificar_especialidad(especialidad, self.especialidades)
-                    mostrar_consultas(self.consultas, especialidad)
-                    #como seria la logica del numero?
-                    numero=input('Seleccione la opción deseada')
+                    mostrar_consultas(self.consultas, especialidad)#
+                    opcion_i=input('Seleccione la opción deseada')
+                    elegir_consulta(opcion_i, self.consultas, especialidad)
+                    numero=input('Seleccionar el número de atención deseado')
                     cedula=input('Ingrese cédula de identidad del socio: ')
                     verificar_cedula(cedula)
                     verificar_cedula_in_socio(cedula, self.socios)
@@ -137,7 +138,7 @@ class Policlinica():
                     #agregar descuento dependiendo del tipo de socio
 
                 elif opcion == 6:#verificar porque no funcionan los getters
-                    while True:#definir deudas
+                    while True:
                         opcion_6=int(input('Seleccione una opción:\n'
                         '1. Obtener todos los médicos asociados a una especialidad específica.\n'
                         '2. Obtener el precio de una consulta de una especialidad en específico.\n'
@@ -152,7 +153,6 @@ class Policlinica():
                             for medico in self.medicos:
                                 if medico.get_especialidad==especialidad_especifica:
                                     print(medico.get_nombre)
-                                    break
                         elif int(opcion_6)==2:
                             especialidad_especifica=input('especialidad especifica: ')
                             verificar_nombre_especialidad(especialidad_especifica)
@@ -160,7 +160,6 @@ class Policlinica():
                             for especialidad in self.especialidades:
                                 if especialidad.especialidad==especialidad_especifica:
                                     print(especialidad.get_precio)
-                                    break
                         elif int(opcion_6)==3:
                             mostrar_deuda_ordenada(self.socios)
                         elif int(opcion_6)==4:#como se comparan fechas?
@@ -173,6 +172,7 @@ class Policlinica():
                             verificar_fecha(fecha_inicio)
                             fecha_final=input('fecha_final: ')
                             verificar_fecha(fecha_final)
+                        break
 
 
 
