@@ -5,7 +5,25 @@ from consulta_medica import ConsultaMedica
 from socio_dos import Socio
 from persona_dos import Persona
 
+def cant_consultas_entre_fechas(fecha_inicio, fecha_final, consultas):
+    cantidad_consultas=0
+    if fecha_inicio<=fecha_final:
+        for consulta in consultas:
+            if fecha_inicio<=consulta.get_fecha_consulta<=fecha_final:
+                cantidad_consultas+=int(consulta.get_cant_pacientes)
+    print(cantidad_consultas)
 
+def ganancias_entre_dos_fechas(fecha_inicio, fecha_final, consultas, socios):
+    plata=0
+    if fecha_inicio<=fecha_final:
+        for consulta in consultas:
+            if fecha_inicio<=consulta.get_fecha_consulta<=fecha_final:
+                for socio in socios:#me filtra las consultas de socios que no estan entre esas fechas?
+                    if socio.get_tipo==1:
+                        plata+=(int(consulta.get_precio)*0.8)
+                    else:
+                        plata+=int(consulta.get_precio)
+    print(plata)
 def mostrar_deuda_ordenada(socios):
     lista=[]
     for socio in socios:
@@ -13,6 +31,7 @@ def mostrar_deuda_ordenada(socios):
     lista.sort()
     for socio in socios:
         print(f' Socio {socio.get_cedula} deuda {socio.get_deuda}')
+
 def agregar_deuda(cedula, especialidad_1, especialidades, socios):
     for socio in socios:
         if socio.get_cedula==cedula:

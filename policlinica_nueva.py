@@ -24,6 +24,8 @@ from utiles import verificar_cedula_in_socio
 from utiles import agregar_deuda
 from utiles import mostrar_deuda_ordenada
 from utiles import elegir_consulta
+from utiles import cant_consultas_entre_fechas
+from utiles import ganancias_entre_dos_fechas
 # from utiles import mostrar_consultas
 
 
@@ -162,20 +164,20 @@ class Policlinica():
                                     print(especialidad.get_precio)
                         elif int(opcion_6)==3:
                             mostrar_deuda_ordenada(self.socios)
-                        elif int(opcion_6)==4:#como se comparan fechas?
+                        elif int(opcion_6)==4:#como se comparan fechas? igual que los nummeros 
                             fecha_inicio=input('fecha inicio: ')
                             verificar_fecha(fecha_inicio)
                             fecha_final=input('fecha_final: ')
                             verificar_fecha(fecha_final)
+                            cant_consultas_entre_fechas(fecha_inicio, fecha_final, self.consultas)
+
                         elif int(opcion_6)==5:
                             fecha_inicio=input('fecha inicio: ')
                             verificar_fecha(fecha_inicio)
                             fecha_final=input('fecha_final: ')
                             verificar_fecha(fecha_final)
+                            ganancias_entre_dos_fechas(fecha_inicio, fecha_final, self.consultas, self.socios)
                         break
-
-
-
 
                 elif opcion == 7:
                     break
