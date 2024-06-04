@@ -71,6 +71,7 @@ def buscar_especialidad(especialidad, especialidades):
 def verificar_especialidad(especialidad, especialidades):
     aux = buscar_especialidad(especialidad, especialidades)
     while aux == False:
+        aux = buscar_especialidad(especialidad, especialidades)
         try:
             opcion = int(input(': Esta especialidad no está dada de alta. Elija una opción:\n'
                             '1 - Volver a ingresar la especialidad\n'
@@ -103,41 +104,45 @@ def verificar_nombre_medico(nombre_medico):
         print("El medico debe ser un string")
         nombre_medico = input("Ingrese el medico: ")
 
+def buscar_medico(medico_i, medicos):
+        for medico in medicos:
+                if medico.get_nombre+" "+medico.get_apellido==medico_i:
+                    return True
+                return False
+
+
 def verificar_medico(medico_i, medicos, especialidades):#como hacer que nombre y apellido pasen a ser una sola variable
-    for medico in medicos:
-        if medico.get_nombre+" "+medico.get_apellido==medico_i:
-            break
-        else:
-            try:
+    auxiliar = buscar_medico(medico_i, medicos)
+    while auxiliar == False:
+        try:
+            opcion = int(input(': Este medico no está dado de alta. Elija una opción:\n'
+                            '1 - Volver a ingresar el medico\n'
+                            '2 - Dar de alta el medico '))
+            while opcion not in [1, 2]:
+                print('La opción no es correcta')
                 opcion = int(input(': Este medico no está dado de alta. Elija una opción:\n'
-                                '1 - Volver a ingresar el medico\n'
-                                '2 - Dar de alta el medico '))
-                while opcion not in [1, 2]:
-                    print('La opción no es correcta')
-                    opcion = int(input(': Este medico no está dado de alta. Elija una opción:\n'
-                                '1 - Volver a ingresar el medico\n'
-                                '2 - Dar de alta el medico '))
-                if opcion == 1:
-                    medico = input('Medico: ')
-                elif opcion == 2:
-                    nombre=input('nombre: ')
-                    verificar_nombre(nombre)
-                    apellido=input('apellido: ')
-                    verificar_apellido(apellido)
-                    cedula=input('cedula: ')
-                    verificar_cedula(cedula)
-                    fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
-                    verificar_fecha_nac(fecha_nac)
-                    fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
-                    verificar_fecha_ing(fecha_ing)
-                    num_celular=input('numero de ceulular: ')
-                    verificar_celular(num_celular)
-                    especialidad=input('especialidad: ')
-                    verificar_especialidad(especialidad, especialidades)
-                    m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
-                    medicos.append(m)
-                    break
-            except ValueError:
+                            '1 - Volver a ingresar el medico\n'
+                            '2 - Dar de alta el medico '))
+            if opcion == 1:
+                medico_i= input('Medico: ')
+            elif opcion == 2:
+                nombre=input('nombre: ')
+                verificar_nombre(nombre)
+                apellido=input('apellido: ')
+                verificar_apellido(apellido)
+                cedula=input('cedula: ')
+                verificar_cedula(cedula)
+                fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
+                verificar_fecha_nac(fecha_nac)
+                fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
+                verificar_fecha_ing(fecha_ing)
+                num_celular=input('numero de ceulular: ')
+                verificar_celular(num_celular)
+                especialidad=input('especialidad: ')
+                verificar_especialidad(especialidad, especialidades)
+                m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
+                medicos.append(m)
+        except ValueError:
                 print("Por favor, ingrese un número válido.")
 
 def verificar_cantidad_max(cantidad_max):
