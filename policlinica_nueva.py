@@ -61,9 +61,9 @@ class Policlinica():
                 opcion = int(opcion) 
 
                 if opcion == 1:
-                    especialidad = input('Especialidad: ')
+                    especialidad = input('Ingrese el nombre de la especialidad: ')
                     verificar_nombre_especialidad(especialidad)
-                    precio = input('Precio: ')
+                    precio = input('Ingrese el precio asociado: ')
                     verificar_precio(precio)
                     e=Especialidad(especialidad, precio)
                     self.especialidades.append(e)
@@ -71,38 +71,39 @@ class Policlinica():
                         print(especialidad.especialidad)
 
                 elif opcion == 2:
-                    nombre=input('nombre: ')
+                    nombre=input('Ingrese el nombre: ')
                     verificar_nombre(nombre)
-                    apellido=input('apellido: ')
+                    apellido=input('Ingrese el apellido: ')
                     verificar_apellido(apellido)
-                    cedula=input('cedula: ')
+                    cedula=input('Ingrese la cédula de identidad: ')
                     verificar_cedula(cedula)
-                    fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
+                    fecha_nac=input('Ingrese la fecha de nacimiento en formato aaaa-mm-dd: ')
                     verificar_fecha_nac(fecha_nac)
-                    fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
+                    fecha_ing=input('Ingrese la fecha de ingreso a la institución en formato aaaa-mm-dd: ')
                     verificar_fecha_ing(fecha_ing)
-                    num_celular=input('numero de ceulular: ')
+                    num_celular=input('Ingrese el número de celular: ')
                     verificar_celular(num_celular)
-                    tipo=input('tipo de socio, bonificado(1) o no bonificado(2)')
+                    tipo=input('Ingrese el tipo de socio: 1- Bonificado 2- No bonificado ')
                     verificar_tipo_socio(tipo)
                     s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo, 0)
                     self.socios.append(s)
                     for socio in self.socios:
                         print (socio.get_nombre)
+                        
                 elif opcion == 3:
-                    nombre=input('nombre: ')
+                    nombre=input('Ingrese el nombre: ')
                     verificar_nombre(nombre)
-                    apellido=input('apellido: ')
+                    apellido=input('Ingrese el apellido: ')
                     verificar_apellido(apellido)
-                    cedula=input('cedula: ')
+                    cedula=input('Ingrese la cédula de identidad: ')
                     verificar_cedula(cedula)
-                    fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
+                    fecha_nac=input('Ingrese la fecha de nacimiento en formato aaaa-mm-dd: ')
                     verificar_fecha_nac(fecha_nac)
-                    fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
+                    fecha_ing=input('Ingrese la fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
                     verificar_fecha_ing(fecha_ing)
-                    num_celular=input('numero de ceulular: ')
+                    num_celular=input('Ingrese el número de celular: ')
                     verificar_celular(num_celular)
-                    especialidad=input('especialidad: ')
+                    especialidad=input('Ingrese la especialidad: ')
                     verificar_especialidad(especialidad,self.especialidades)
                     m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
                     self.medicos.append(m)
@@ -130,10 +131,10 @@ class Policlinica():
                     verificar_nombre_especialidad(especialidad)
                     verificar_especialidad(especialidad, self.especialidades)
                     mostrar_consultas(self.consultas, especialidad)#
-                    opcion_i=input('Seleccione la opción deseada')
+                    opcion_i=input('Seleccione la opción deseada ')
                     elegir_consulta(opcion_i, self.consultas, especialidad)
-                    numero=input('Seleccionar el número de atención deseado')
-                    cedula=input('Ingrese cédula de identidad del socio: ')
+                    numero=input('Seleccionar el número de atención deseado ')
+                    cedula=input('Ingrese la cédula de identidad del socio: ')
                     verificar_cedula(cedula)
                     verificar_cedula_in_socio(cedula, self.socios)
                     agregar_deuda(cedula, especialidad, self.especialidades, self.socios)
@@ -148,7 +149,7 @@ class Policlinica():
                         '4. Realizar consultas respecto a cantidad de consultas entre dos fechas\n'
                         '5. Realizar consultas respecto a las ganancias obtenidas entre dos fechas.'))
                         if int(opcion_6)==1:
-                            especialidad_especifica=input('especialidad especifica')
+                            especialidad_especifica=input('Especialidad especifica: ')
                             verificar_nombre_especialidad(especialidad_especifica)
                             verificar_especialidad(especialidad_especifica, self.especialidades)
                             #si doy de alta una especialidad se termina el programa, va al menu principal, o vuelve a las 5 opciones?
@@ -156,7 +157,7 @@ class Policlinica():
                                 if medico.get_especialidad==especialidad_especifica:
                                     print(medico.get_nombre)
                         elif int(opcion_6)==2:
-                            especialidad_especifica=input('especialidad especifica: ')
+                            especialidad_especifica=input('Especialidad especifica: ')
                             verificar_nombre_especialidad(especialidad_especifica)
                             verificar_especialidad(especialidad_especifica, self.especialidades)
                             for especialidad in self.especialidades:
@@ -164,17 +165,17 @@ class Policlinica():
                                     print(especialidad.get_precio)
                         elif int(opcion_6)==3:
                             mostrar_deuda_ordenada(self.socios)
-                        elif int(opcion_6)==4:#como se comparan fechas? igual que los nummeros 
-                            fecha_inicio=input('fecha inicio: ')
+                        elif int(opcion_6)==4:
+                            fecha_inicio=input('Fecha inicio: ')
                             verificar_fecha(fecha_inicio)
-                            fecha_final=input('fecha_final: ')
+                            fecha_final=input('Fecha_final: ')
                             verificar_fecha(fecha_final)
                             cant_consultas_entre_fechas(fecha_inicio, fecha_final, self.consultas)
 
                         elif int(opcion_6)==5:
-                            fecha_inicio=input('fecha inicio: ')
+                            fecha_inicio=input('Fecha inicio: ')
                             verificar_fecha(fecha_inicio)
-                            fecha_final=input('fecha_final: ')
+                            fecha_final=input('Fecha_final: ')
                             verificar_fecha(fecha_final)
                             ganancias_entre_dos_fechas(fecha_inicio, fecha_final, self.consultas, self.socios)
                         break
@@ -182,7 +183,7 @@ class Policlinica():
                 elif opcion == 7:
                     break
                 else:
-                    print("La opción seleccionada no es correcta, vuelva a intentar con otra opción.")
+                    print("La opción seleccionada no es correcta, vuelva a intentar con otra opción. ")
 
 if __name__ == '__main__':
     poli = Policlinica('hola')
