@@ -68,10 +68,11 @@ def buscar_especialidad(especialidad, especialidades):
             return True
     return False
 
-def verificar_especialidad(especialidad, especialidades):
-    aux = buscar_especialidad(especialidad, especialidades)
-    while aux == False:
-        aux = buscar_especialidad(especialidad, especialidades)
+def verificar_especialidad_2(especialidades, especialidad_dada):
+    while especialidad_dada not in especialidades:
+        for especialidad in especialidades:
+            if especialidad.especialidad==especialidad_dada:
+                return especialidad_dada
         try:
             opcion = int(input(': Esta especialidad no está dada de alta. Elija una opción:\n'
                             '1 - Volver a ingresar la especialidad\n'
@@ -82,15 +83,17 @@ def verificar_especialidad(especialidad, especialidades):
                                     '1 - Volver a ingresar la especialidad\n'
                                     '2 - Dar de alta esta especialidad: '))
             if opcion == 1:
-                especialidad = input('Especialidad: ')
+                especialidad_dada = input('Especialidad: ')
             elif opcion == 2:
                 precio = input('Precio: ')
                 verificar_precio(precio)
-                e=Especialidad(especialidad, precio)
+                e=Especialidad(especialidad_dada, precio)
                 especialidades.append(e)
                 break
         except ValueError:
             print("Por favor, ingrese un número válido.")
+
+
 
 
 #4. Dar de alta una consulta médica (ademas despues verificar especialidad)
@@ -139,7 +142,7 @@ def verificar_medico(medico_i, medicos, especialidades):#como hacer que nombre y
                 num_celular=input('numero de ceulular: ')
                 verificar_celular(num_celular)
                 especialidad=input('especialidad: ')
-                verificar_especialidad(especialidad, especialidades)
+                verificar_especialidad_2(especialidades, especialidad)
                 m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
                 medicos.append(m)
         except ValueError:

@@ -17,7 +17,7 @@ from utiles import verificar_celular
 from utiles import verificar_fecha
 from utiles import verificar_medico
 from utiles import verificar_nombre_medico
-from utiles import verificar_especialidad
+from utiles import verificar_especialidad_2
 from utiles import verificar_nombre_especialidad
 from utiles import mostrar_consultas
 from utiles import verificar_cedula_in_socio
@@ -40,10 +40,6 @@ class Policlinica():
     @property
     def get_nombre_policlinica(self):
         return self.__nombre
-    
-    def get_especialidad(self):
-        for especialidad in self.especialidades:
-            return especialidad.get_especialidad#funcion para retornar el nombre de la especialidad
 
     def menu(self):
         while True:
@@ -104,7 +100,7 @@ class Policlinica():
                     num_celular=input('Ingrese el número de celular: ')
                     verificar_celular(num_celular)
                     especialidad=input('Ingrese la especialidad: ')
-                    verificar_especialidad(especialidad,self.especialidades)
+                    verificar_especialidad_2(self.especialidades, especialidad)
                     m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
                     self.medicos.append(m)
                     for medico in self.medicos:
@@ -114,7 +110,7 @@ class Policlinica():
                 elif opcion == 4:
                     nombre_especialidad = input('Ingrese la especialidad: ')
                     verificar_nombre_especialidad(nombre_especialidad)
-                    verificar_especialidad(nombre_especialidad, self.especialidades)
+                    verificar_especialidad_2(self.especialidades, nombre_especialidad)
                     nombre_medico = input('Ingrese el nombre completo del médico: ')      
                     verificar_nombre_medico(nombre_medico)                      
                     verificar_medico(nombre_medico, self.medicos, self.especialidades)              
@@ -129,7 +125,7 @@ class Policlinica():
                 elif opcion == 5:
                     especialidad=str(input('Ingrese la especialidad: '))
                     verificar_nombre_especialidad(especialidad)
-                    verificar_especialidad(especialidad, self.especialidades)
+                    verificar_especialidad_2(self.especialidades, especialidad)
                     mostrar_consultas(self.consultas, especialidad)#
                     opcion_i=input('Seleccione la opción deseada ')
                     elegir_consulta(opcion_i, self.consultas, especialidad)
