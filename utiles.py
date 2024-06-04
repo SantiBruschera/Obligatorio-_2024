@@ -288,15 +288,15 @@ def cant_consultas_entre_fechas(fecha_inicio, fecha_final, consultas):
                 cantidad_consultas+=int(consulta.get_cant_pacientes)
     print(cantidad_consultas)
 
-def ganancias_entre_dos_fechas(fecha_inicio, fecha_final, consultas, socios):
-    plata=0
-    if fecha_inicio<=fecha_final:
-        for consulta in consultas:
-            if fecha_inicio<=consulta.get_fecha_consulta<=fecha_final:
-                for socio in socios:#me filtra las consultas de socios que no estan entre esas fechas?
-                    if socio.get_tipo==1:
-                        plata+=(int(consulta.get_precio)*0.8)
-                    else:
-                        plata+=int(consulta.get_precio)
-    print(plata)
 
+def ganancias_entre_fechas(fecha_inicio, fecha_final, socios, especialidades, consultas):
+    plata=0
+    if fecha_inicio<fecha_final:
+        for socio in socios:
+            for consulta in consultas:
+                for especialidad in especialidades:
+                    if fecha_inicio<=consulta.get_fecha_consulta<=fecha_final:
+                        if socio.get_tipo==1:
+                            plata+=(int(especialidad.get_precio)*0.8)
+                        else:
+                            plata+=int(especialidad.get_precio)

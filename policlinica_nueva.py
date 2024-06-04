@@ -13,7 +13,6 @@ from utiles import verificar_fecha_nac
 from utiles import verificar_fecha_ing
 from utiles import verificar_celular
 from utiles import verificar_fecha
-from utiles import verificar_medico
 from utiles import verificar_nombre_medico
 from utiles import verificar_especialidad_2
 from utiles import verificar_nombre_especialidad
@@ -23,7 +22,7 @@ from utiles import agregar_deuda
 from utiles import mostrar_deuda_ordenada
 from utiles import elegir_consulta
 from utiles import cant_consultas_entre_fechas
-from utiles import ganancias_entre_dos_fechas
+from utiles import ganancias_entre_fechas
 from utiles import verificar_nombre_completo_medico
 # from utiles import mostrar_consultas
 
@@ -125,7 +124,7 @@ class Policlinica():
                     especialidad=str(input('Ingrese la especialidad: '))
                     verificar_nombre_especialidad(especialidad)
                     verificar_especialidad_2(self.especialidades, especialidad)
-                    mostrar_consultas(self.consultas, especialidad)#
+                    mostrar_consultas(self.consultas, especialidad)
                     opcion_i=input('Seleccione la opción deseada ')
                     elegir_consulta(opcion_i, self.consultas, especialidad)
                     numero=input('Seleccionar el número de atención deseado ')
@@ -172,7 +171,7 @@ class Policlinica():
                             verificar_fecha(fecha_inicio)
                             fecha_final=input('Fecha_final: ')
                             verificar_fecha(fecha_final)
-                            ganancias_entre_dos_fechas(fecha_inicio, fecha_final, self.consultas, self.socios)
+                            ganancias_entre_fechas(fecha_inicio, fecha_final, self.socios, self.especialidades, self.consultas)
                         break
 
                 elif opcion == 7:
