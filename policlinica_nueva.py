@@ -4,9 +4,7 @@ from especialidad_dos import Especialidad
 from consulta_medica import ConsultaMedica
 from utiles import verificar_cantidad_max
 from utiles import verificar_fecha_consulta
-from utiles import verificar_especialidad
 from utiles import verificar_tipo_socio
-from utiles import verificar_especialidad
 from utiles import verificar_precio
 from utiles import verificar_nombre
 from utiles import verificar_apellido
@@ -26,6 +24,7 @@ from utiles import mostrar_deuda_ordenada
 from utiles import elegir_consulta
 from utiles import cant_consultas_entre_fechas
 from utiles import ganancias_entre_dos_fechas
+from utiles import verificar_nombre_completo_medico
 # from utiles import mostrar_consultas
 
 
@@ -113,7 +112,7 @@ class Policlinica():
                     verificar_especialidad_2(self.especialidades, nombre_especialidad)
                     nombre_medico = input('Ingrese el nombre completo del médico: ')      
                     verificar_nombre_medico(nombre_medico)                      
-                    verificar_medico(nombre_medico, self.medicos, self.especialidades)              
+                    verificar_nombre_completo_medico(nombre_medico, self.medicos, self.especialidades)              
                     fecha_consulta = input('Ingrese la fecha de consulta (aaaa-mm-dd): ')
                     verificar_fecha_consulta(fecha_consulta)
                     cant_pacientes = input('Ingrese la cantidad de pacientes que se atenderán: ')
@@ -147,7 +146,7 @@ class Policlinica():
                         if int(opcion_6)==1:
                             especialidad_especifica=input('Especialidad especifica: ')
                             verificar_nombre_especialidad(especialidad_especifica)
-                            verificar_especialidad(especialidad_especifica, self.especialidades)
+                            verificar_especialidad_2(self.especialidades, especialidad_especifica)
                             #si doy de alta una especialidad se termina el programa, va al menu principal, o vuelve a las 5 opciones?
                             for medico in self.medicos:
                                 if medico.get_especialidad==especialidad_especifica:
@@ -155,7 +154,7 @@ class Policlinica():
                         elif int(opcion_6)==2:
                             especialidad_especifica=input('Especialidad especifica: ')
                             verificar_nombre_especialidad(especialidad_especifica)
-                            verificar_especialidad(especialidad_especifica, self.especialidades)
+                            verificar_especialidad_2(self.especialidades, especialidad_especifica)
                             for especialidad in self.especialidades:
                                 if especialidad.especialidad==especialidad_especifica:
                                     print(especialidad.get_precio)
