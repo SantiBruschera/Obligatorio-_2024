@@ -119,19 +119,26 @@ class Policlinica():
                     consulta = ConsultaMedica(nombre_especialidad, nombre_medico, fecha_consulta, cant_pacientes)
                     self.consultas.append(consulta)
 
-
                 elif opcion == 5:
                     especialidad=str(input('Ingrese la especialidad: '))
                     verificar_nombre_especialidad(especialidad)
                     verificar_especialidad_2(self.especialidades, especialidad)
-                    mostrar_consultas(self.consultas, especialidad)
+                    a=mostrar_consultas(self.consultas, especialidad)
                     opcion_i=input('Seleccione la opción deseada ')
-                    elegir_consulta(opcion_i, self.consultas, especialidad)
-                    numero=input('Seleccionar el número de atención deseado ')
-                    cedula=input('Ingrese la cédula de identidad del socio: ')
-                    verificar_cedula(cedula)
-                    verificar_cedula_in_socio(cedula, self.socios)
+                    #validad que el input este enre 1 y el largo de la lista
+                    
+                    medico_select, fecha_select=a[int(opcion_i)-1]
+                    consulta_sel=elegir_consulta(medico_select,fecha_select, especialidad, self.consultas)
+                    print(f'los turnos libres son: {consulta_sel.turnos_libres}')
+                    numero=int(input('Seleccionar el número de atención deseado '))
+                    cedula=int(input('Ingrese la cédula de identidad del socio: '))
+                    # verificar_cedula(cedula)
+                    # verificar_cedula_in_socio(cedula, self.socios)
                     agregar_deuda(cedula, especialidad, self.especialidades, self.socios)
+                    consulta_sel.eliminar_numero(numero)
+                    #validar (usando in o not in)
+                    
+                    
                     #agregar descuento dependiendo del tipo de socio
 
                 elif opcion == 6:#verificar porque no funcionan los getters
@@ -171,7 +178,7 @@ class Policlinica():
                             verificar_fecha(fecha_inicio)
                             fecha_final=input('Fecha_final: ')
                             verificar_fecha(fecha_final)
-                            ganancias_entre_fechas(fecha_inicio, fecha_final, self.socios, self.especialidades, self.consultas)
+                            print(ganancias_entre_fechas(fecha_inicio, fecha_final, self.socios, self.especialidades, self.consultas))
                         break
 
                 elif opcion == 7:

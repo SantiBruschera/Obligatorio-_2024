@@ -16,14 +16,14 @@ class Socio(Persona):
         return self.__tipo
     
     def set_tipo(self, tipo_nuevo):
-        self.__tipo+=tipo_nuevo
+        self.__tipo=tipo_nuevo
     
     @property
     def get_deuda(self):
         return self.__deuda
     
     def set_deuda(self, deuda_nueva):
-        self.__deuda==deuda_nueva
+        self.__deuda+=deuda_nueva
     
     @property
     def get_nombre(self):

@@ -205,64 +205,72 @@ def verificar_fecha_consulta(fecha_consulta):
 #5. Emitir un ticket de consulta (verificar nombre especialidad, verificar especialidad)
 def mostrar_consultas(consultas, especialidad):
     lista=[]
+    n=1
     for consulta in consultas:
         if consulta.get_nombre_especialidad == especialidad:
-            n=1
             print(f"{n} - Doctor:{consulta.get_nombre_medico}  Dia de la consulta: {consulta.get_fecha_consulta}")
-            lista.append(n, consulta.get_nombre_medico, consulta.get_fecha_consulta)
+            lista.append((consulta.get_nombre_medico, consulta.get_fecha_consulta))
             n+=1
     return lista
 
-def elegir_consulta(opcion, consultas, especialidad):
-        for i in range(len(mostrar_consultas(consultas, especialidad))):
-            if i == opcion:
-                mostrar_consultas(consultas, especialidad)[i][0].pop()
-                for consulta in consultas:
-                    if consulta.get_especialidad==especialidad and opcion==mostrar_consultas(consultas, especialidad)[0][i]:
-                        return consulta.get_cant_pacientes
-            else:
-                opcion=input('No es un número de consulta válido, los números válidos son: 1, 4, 5 y 7')
+def elegir_consulta(nombre, fecha, especialidad, consultas):
+    for consulta in consultas:
+        if consulta.get_nombre_medico==nombre and consulta.get_fecha_consulta==fecha and consulta.get_nombre_especialidad==especialidad:
+            return consulta
+    
+
+# def elegir_consulta(opcion, consultas, especialidad):
+#         for i in range(len(mostrar_consultas(consultas, especialidad))):
+#             if i == opcion:
+#                 mostrar_consultas(consultas, especialidad)[i][0].pop()
+#                 for consulta in consultas:
+#                     if consulta.get_especialidad==especialidad and opcion==mostrar_consultas(consultas, especialidad)[0][i]:
+#                         return consulta.get_cant_pacientes
+#             else:
+#                 opcion=input('No es un número de consulta válido, los números válidos son: 1, 4, 5 y 7')
 
 def verificar_cedula_in_socio(cedula, socios):
     for socio in socios:
-        if cedula not in socio.get_cedula:
-            print('entro 2')
-            opcion=0
-            while opcion not in [1,2]:
-                opcion=input('Este socio no está dado de alta, elija una opción:\n'
-                '- 1 - Volver a ingresar el socio \n'
-                '- 2 - Dar de alta el socio')
-                if opcion==1:
-                    cedula=input("socio: ")
-                elif opcion==2:
-                    nombre=input('nombre: ')
-                    verificar_nombre(nombre)
-                    apellido=input('apellido: ')
-                    verificar_apellido(apellido)
-                    cedula=input('cedula: ')
-                    verificar_cedula(cedula)
-                    fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
-                    verificar_fecha_nac(fecha_nac)
-                    fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
-                    verificar_fecha_ing(fecha_ing)
-                    num_celular=input('numero de ceulular: ')
-                    verificar_celular(num_celular)
-                    tipo=input('tipo de socio, bonificado(1) o no bonificado(2)')
-                    verificar_tipo_socio(tipo)
-                    s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo)
-                    socios.append(s)
+        este=False
+        if cedula == socio.get_cedula:
+            este=True
+    if este==False:
+        opcion=0
+        while opcion not in [1,2]:
+            opcion=input('Este socio no está dado de alta, elija una opción:\n'
+            '- 1 - Volver a ingresar el socio \n'
+            '- 2 - Dar de alta el socio')
+            if opcion==1:
+                cedula=input("socio: ")
+            elif opcion==2:
+                nombre=input('nombre: ')
+                verificar_nombre(nombre)
+                apellido=input('apellido: ')
+                verificar_apellido(apellido)
+                cedula=input('cedula: ')
+                verificar_cedula(cedula)
+                fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
+                verificar_fecha_nac(fecha_nac)
+                fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
+                verificar_fecha_ing(fecha_ing)
+                num_celular=input('numero de ceulular: ')
+                verificar_celular(num_celular)
+                tipo=input('tipo de socio, bonificado(1) o no bonificado(2)')
+                verificar_tipo_socio(tipo)
+                s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo)
+                socios.append(s)
 
 def agregar_deuda(cedula, especialidad_1, especialidades, socios):
     for socio in socios:
-        if socio.get_cedula==cedula:
+        if int(socio.get_cedula)==int(cedula):
             for especialidad in especialidades:
                 if especialidad.especialidad==especialidad_1:
-                    if socio.get_tipo==1:
-                        especialidad.get_precio=especialidad.get_precio*0.8
-                        socio.set_deuda(especialidad.get_precio)
+                    if int(socio.get_tipo)==1:
+                        precio_consulta=int(especialidad.get_precio)*0.8
+                        socio.set_deuda(precio_consulta)
                         print(socio.get_deuda)
                     else:
-                        socio.set_deuda(especialidad.get_precio)
+                        socio.set_deuda(int(especialidad.get_precio))
                         print(socio.get_deuda)
 
 
@@ -274,11 +282,12 @@ def verificar_fecha(fecha):
 
 def mostrar_deuda_ordenada(socios):
     lista=[]
+    print(socios)
     for socio in socios:
-        lista.append(socio.get_deuda)
-    lista.sort()
-    for socio in socios:
-        print(f' Socio {socio.get_cedula} deuda {socio.get_deuda}')
+        lista.append((socio.get_deuda,socio.get_nombre))
+    lista_ordenada= sorted(lista, key=lambda x:x[0])
+    print(lista_ordenada)
+    
 
 def cant_consultas_entre_fechas(fecha_inicio, fecha_final, consultas):
     cantidad_consultas=0
@@ -296,7 +305,8 @@ def ganancias_entre_fechas(fecha_inicio, fecha_final, socios, especialidades, co
             for consulta in consultas:
                 for especialidad in especialidades:
                     if fecha_inicio<=consulta.get_fecha_consulta<=fecha_final:
-                        if socio.get_tipo==1:
+                        if int(socio.get_tipo)==1:
                             plata+=(int(especialidad.get_precio)*0.8)
                         else:
                             plata+=int(especialidad.get_precio)
+    return plata

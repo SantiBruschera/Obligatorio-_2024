@@ -4,8 +4,16 @@ class ConsultaMedica():
         self.__nombre_especialidad = nombre_especialidad
         self.__fecha_consulta= fecha_consulta
         self.__cant_pacientes = cant_pacientes
+        self.__turnos_libres = [*range(1, int(cant_pacientes)+1)]
 
     @property
+    def turnos_libres(self):
+        return  self.__turnos_libres
+
+    def eliminar_numero(self, numero):
+        self.__turnos_libres.remove(numero)
+    
+    @property 
     def get_nombre_medico(self):
         return self.__nombre_medico
     
