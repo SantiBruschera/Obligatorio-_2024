@@ -24,7 +24,7 @@ from utiles import elegir_consulta
 from utiles import cant_consultas_entre_fechas
 from utiles import ganancias_entre_fechas
 from utiles import verificar_nombre_completo_medico
-# from utiles import mostrar_consultas
+from utiles import mostrar_consultas
 
 
 class Policlinica():
