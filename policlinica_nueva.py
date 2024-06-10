@@ -2,7 +2,7 @@ from entities.socio_dos import Socio
 from entities.medico_dos import Medico
 from entities.especialidad_dos import Especialidad
 from entities.consulta_medica import ConsultaMedica
-from entities.utiles import verificar_cantidad_max
+from entities.utiles import verificar_cantidad_max, verificar_opcion
 from entities.utiles import verificar_fecha_consulta
 from entities.utiles import verificar_tipo_socio
 from entities.utiles import verificar_precio
@@ -56,6 +56,7 @@ class Policlinica():
                     precio= verificar_precio(precio)
                     e= Especialidad(especialidad, precio)
                     self.especialidades.append(e)
+                    print('La especialidad se ha creado con éxito')
                     for especialidad in self.especialidades:
                         print(especialidad.especialidad)
                         print(especialidad.get_precio)
@@ -126,7 +127,8 @@ class Policlinica():
                     a= mostrar_consultas(self.consultas, especialidad)
                     opcion_i= input('Seleccione la opción deseada ')
                     #validad que el input este enre 1 y el largo de la lista
-                    
+                    opcion_i=verificar_opcion(a, opcion_i)
+
                     medico_select, fecha_select=a[int(opcion_i)-1]
                     consulta_sel=elegir_consulta(medico_select,fecha_select, especialidad, self.consultas)
                     print(f'los turnos libres son: {consulta_sel.turnos_libres}')
@@ -139,9 +141,8 @@ class Policlinica():
                     #validar (usando in o not in)
                     
                     
-                    #agregar descuento dependiendo del tipo de socio
 
-                elif opcion == 6:#verificar porque no funcionan los getters
+                elif opcion == 6:
                     while True:
                         opcion_6= int(input('Seleccione una opción:\n'
                         '1. Obtener todos los médicos asociados a una especialidad específica.\n'
@@ -183,8 +184,8 @@ class Policlinica():
 
                 elif opcion == 7:
                     break
-                else:
-                    print("La opción seleccionada no es correcta, vuelva a intentar con otra opción. ")
+            else:
+                print("La opción seleccionada no es correcta, vuelva a intentar con otra opción. ")
 
 if __name__ == '__main__':
     poli = Policlinica()
