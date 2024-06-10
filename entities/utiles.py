@@ -1,9 +1,9 @@
 from datetime import datetime
-from especialidad_dos import Especialidad
-from medico_dos import Medico
-from consulta_medica import ConsultaMedica
-from socio_dos import Socio
-from persona_dos import Persona
+from entities.especialidad_dos import Especialidad
+from entities.medico_dos import Medico
+from entities.consulta_medica import ConsultaMedica
+from entities.socio_dos import Socio
+from entities.persona_dos import Persona
 
 def es_fecha_valida(fecha_str):#utiliza datetime para fijarse que sea una fecha valida
         try:
@@ -17,6 +17,7 @@ def es_fecha_valida(fecha_str):#utiliza datetime para fijarse que sea una fecha 
 def verificar_nombre_especialidad(nombre_especialidad):
     while nombre_especialidad.isdigit() or nombre_especialidad=='':
         nombre_especialidad= input("La especialidad debe ser un string")
+    return nombre_especialidad
 
 def verificar_precio(precio):
             while not precio.isdigit() or int(precio)<=0:
@@ -29,36 +30,43 @@ def verificar_nombre(nombre):#cambie el verificar datos, a una funcion por dato 
     while nombre.isdigit() or nombre=='':
         print("No es un nombre válido, ingréselo de nuevo.")
         nombre = input("Ingrese el nombre: ")
+    return nombre
 
 def verificar_apellido(apellido):
     while apellido.isdigit() or apellido=='':
         print("No es un apellido válido, ingréselo de nuevo.")
         apellido = input("Ingrese el apellido: ")
+    return apellido
 
 def verificar_cedula(cedula):
     while not str(cedula).isdigit() or len(str(cedula)) != 8:
         print("No es una cédula válida, ingrese nuevamente una cédula de 8 dígitos.")
         cedula = input("Ingrese la cédula de identidad (8 dígitos): ")
+    return cedula
 
 def verificar_fecha_nac(fecha_nac):
     while not es_fecha_valida(fecha_nac):
         print("No es una fecha válida, vuelva a ingresarla en el formato aaaa-mm-dd.")
         fecha_nac = input("Ingrese la fecha de nacimiento en formato aaaa-mm-dd: ")
+    return fecha_nac
 
 def verificar_fecha_ing(fecha_ing):
     while not es_fecha_valida(fecha_ing):
         print("No es una fecha válida, vuelva a ingresarla en el formato aaaa-mm-dd.")
         fecha_ing = input("Ingrese la fecha de ingreso a la institución en formato aaaa-mm-dd: ")
-    
+    return fecha_ing
+
 def verificar_celular(celular):
     while not celular.isdigit() or len(str(celular)) != 9 or not str(celular).startswith('09'):
         print("No es un número de celular válido, ingrese un número con el formato 09XXXXXXX.")
         celular = input("Ingrese el número de celular (9 dígitos): ")
+    return celular
 
 def verificar_tipo_socio(tipo):
         while int(tipo) != 1 and int(tipo) != 2:
             print('El valor ingresado no es correcto, elige la opción 1 o 2.')
             tipo=int(input('tipo de socio: '))
+        return tipo
 
 
 #3. Dar de alta un médico, las del 2 pero en vez de verificar tipo socio, verificar especialidad
@@ -101,11 +109,13 @@ def verificar_nombre_especialidad(nombre_especialidad):
     while nombre_especialidad.isdigit() or nombre_especialidad=='':    
         print("La especialidad debe ser un string")
         nombre_especialidad = input("Ingrese la especialidad: ")
+    return nombre_especialidad
 
 def verificar_nombre_medico(nombre_medico):
     while nombre_medico.isdigit() or nombre_medico=='':    
         print("El medico debe ser un string")
         nombre_medico = input("Ingrese el medico: ")
+    return nombre_medico
 
 def verificar_nombre_completo_medico(nombre_completo, medicos, especialidades):
     while True:
@@ -219,15 +229,7 @@ def elegir_consulta(nombre, fecha, especialidad, consultas):
             return consulta
     
 
-# def elegir_consulta(opcion, consultas, especialidad):
-#         for i in range(len(mostrar_consultas(consultas, especialidad))):
-#             if i == opcion:
-#                 mostrar_consultas(consultas, especialidad)[i][0].pop()
-#                 for consulta in consultas:
-#                     if consulta.get_especialidad==especialidad and opcion==mostrar_consultas(consultas, especialidad)[0][i]:
-#                         return consulta.get_cant_pacientes
-#             else:
-#                 opcion=input('No es un número de consulta válido, los números válidos son: 1, 4, 5 y 7')
+
 
 def verificar_cedula_in_socio(cedula, socios):
     for socio in socios:
@@ -259,6 +261,8 @@ def verificar_cedula_in_socio(cedula, socios):
                 verificar_tipo_socio(tipo)
                 s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo)
                 socios.append(s)
+    else: 
+        return cedula
 
 def agregar_deuda(cedula, especialidad_1, especialidades, socios):
     for socio in socios:
@@ -279,6 +283,7 @@ def verificar_fecha(fecha):
     while not es_fecha_valida(fecha):
         print("No es una fecha válida, vuelva a ingresarla en el formato aaaa-mm-dd.")
         fecha = input("Ingrese la fecha en formato aaaa-mm-dd: ") 
+    return fecha
 
 def mostrar_deuda_ordenada(socios):
     lista=[]

@@ -1,4 +1,4 @@
-from persona_dos import Persona 
+from entities.persona_dos import Persona 
 class Socio(Persona):
     def __init__(self, nombre, apellido, cedula, fecha_nac, fecha_ing, celular, tipo, deuda=0):
         self.__tipo=tipo

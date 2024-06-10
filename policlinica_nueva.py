@@ -1,44 +1,39 @@
-from socio_dos import Socio
-from medico_dos import Medico
-from especialidad_dos import Especialidad
-from consulta_medica import ConsultaMedica
-from utiles import verificar_cantidad_max
-from utiles import verificar_fecha_consulta
-from utiles import verificar_tipo_socio
-from utiles import verificar_precio
-from utiles import verificar_nombre
-from utiles import verificar_apellido
-from utiles import verificar_cedula
-from utiles import verificar_fecha_nac
-from utiles import verificar_fecha_ing
-from utiles import verificar_celular
-from utiles import verificar_fecha
-from utiles import verificar_nombre_medico
-from utiles import verificar_especialidad_2
-from utiles import verificar_nombre_especialidad
-from utiles import mostrar_consultas
-from utiles import verificar_cedula_in_socio
-from utiles import agregar_deuda
-from utiles import mostrar_deuda_ordenada
-from utiles import elegir_consulta
-from utiles import cant_consultas_entre_fechas
-from utiles import ganancias_entre_fechas
-from utiles import verificar_nombre_completo_medico
-from utiles import mostrar_consultas
+from entities.socio_dos import Socio
+from entities.medico_dos import Medico
+from entities.especialidad_dos import Especialidad
+from entities.consulta_medica import ConsultaMedica
+from entities.utiles import verificar_cantidad_max
+from entities.utiles import verificar_fecha_consulta
+from entities.utiles import verificar_tipo_socio
+from entities.utiles import verificar_precio
+from entities.utiles import verificar_nombre
+from entities.utiles import verificar_apellido
+from entities.utiles import verificar_cedula
+from entities.utiles import verificar_fecha_nac
+from entities.utiles import verificar_fecha_ing
+from entities.utiles import verificar_celular
+from entities.utiles import verificar_fecha
+from entities.utiles import verificar_nombre_medico
+from entities.utiles import verificar_especialidad_2
+from entities.utiles import verificar_nombre_especialidad
+from entities.utiles import mostrar_consultas
+from entities.utiles import verificar_cedula_in_socio
+from entities.utiles import agregar_deuda
+from entities.utiles import mostrar_deuda_ordenada
+from entities.utiles import elegir_consulta
+from entities.utiles import cant_consultas_entre_fechas
+from entities.utiles import ganancias_entre_fechas
+from entities.utiles import verificar_nombre_completo_medico
+from entities.utiles import mostrar_consultas
 
 
 class Policlinica():
-    def __init__(self, nombre): #los arrayssiempre tienen que ir como constructores, dentro del init. Tenemos que hacerles getters y setters. Arreglar lo que nos dijo flor de que escribiamos mal los getters y setters. Y hacer lo de socios bonificados y no bonificados. 
-        self.__nombre = nombre
+    def __init__(self): #los arrayssiempre tienen que ir como constructores, dentro del init. Tenemos que hacerles getters y setters. Arreglar lo que nos dijo flor de que escribiamos mal los getters y setters. Y hacer lo de socios bonificados y no bonificados. 
         self.medicos = [] 
         self.socios = [] 
         self.especialidades = []
         self.consultas = []
     
-    @property
-    def get_nombre_policlinica(self):
-        return self.__nombre
-
     def menu(self):
         while True:
             opcion = input('Seleccione una opción del menú:\n'
@@ -83,7 +78,7 @@ class Policlinica():
                     self.socios.append(s)
                     for socio in self.socios:
                         print (socio.get_nombre)
-                        
+                        print(socio.get_tipo)
                 elif opcion == 3:
                     nombre=input('Ingrese el nombre: ')
                     verificar_nombre(nombre)
@@ -118,6 +113,9 @@ class Policlinica():
                     verificar_cantidad_max(cant_pacientes)
                     consulta = ConsultaMedica(nombre_especialidad, nombre_medico, fecha_consulta, cant_pacientes)
                     self.consultas.append(consulta)
+                    for consulta in self.consultas:
+                        print(consulta.especialidad)
+                        print(consulta.get_nombre_medico)
 
                 elif opcion == 5:
                     especialidad=str(input('Ingrese la especialidad: '))
@@ -187,5 +185,5 @@ class Policlinica():
                     print("La opción seleccionada no es correcta, vuelva a intentar con otra opción. ")
 
 if __name__ == '__main__':
-    poli = Policlinica('hola')
+    poli = Policlinica()
     poli.menu()
