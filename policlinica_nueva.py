@@ -56,8 +56,8 @@ class Policlinica():
                     verificar_precio(precio)
                     e=Especialidad(especialidad, precio)
                     self.especialidades.append(e)
-                    for especialidad in self.especialidades:
-                        print(especialidad.especialidad)
+                    # for especialidad in self.especialidades:
+                    #     print(especialidad.especialidad)
 
                 elif opcion == 2:
                     nombre=input('Ingrese el nombre: ')
@@ -76,9 +76,9 @@ class Policlinica():
                     verificar_tipo_socio(tipo)
                     s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo, 0)
                     self.socios.append(s)
-                    for socio in self.socios:
-                        print (socio.get_nombre)
-                        print(socio.get_tipo)
+                    # for socio in self.socios:
+                    #     print (socio.get_nombre)
+                    #     print(socio.get_tipo)
                 elif opcion == 3:
                     nombre=input('Ingrese el nombre: ')
                     verificar_nombre(nombre)
@@ -96,9 +96,9 @@ class Policlinica():
                     verificar_especialidad_2(self.especialidades, especialidad)
                     m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
                     self.medicos.append(m)
-                    for medico in self.medicos:
-                        print(medico.get_nombre)
-                        print(medico.get_especialidad)
+                    # for medico in self.medicos:
+                    #     print(medico.get_nombre)
+                    #     print(medico.get_especialidad)
 
                 elif opcion == 4:
                     nombre_especialidad = input('Ingrese la especialidad: ')
@@ -113,9 +113,9 @@ class Policlinica():
                     verificar_cantidad_max(cant_pacientes)
                     consulta = ConsultaMedica(nombre_especialidad, nombre_medico, fecha_consulta, cant_pacientes)
                     self.consultas.append(consulta)
-                    for consulta in self.consultas:
-                        print(consulta.especialidad)
-                        print(consulta.get_nombre_medico)
+                    # for consulta in self.consultas:
+                    #     print(consulta.especialidad)
+                    #     print(consulta.get_nombre_medico)
 
                 elif opcion == 5:
                     especialidad=str(input('Ingrese la especialidad: '))
@@ -152,16 +152,16 @@ class Policlinica():
                             verificar_nombre_especialidad(especialidad_especifica)
                             verificar_especialidad_2(self.especialidades, especialidad_especifica)
                             #si doy de alta una especialidad se termina el programa, va al menu principal, o vuelve a las 5 opciones?
-                            for medico in self.medicos:
-                                if medico.get_especialidad==especialidad_especifica:
-                                    print(medico.get_nombre)
+                            # for medico in self.medicos:
+                            #     if medico.get_especialidad==especialidad_especifica:
+                            #         print(medico.get_nombre)
                         elif int(opcion_6)==2:
                             especialidad_especifica=input('Especialidad especifica: ')
                             verificar_nombre_especialidad(especialidad_especifica)
                             verificar_especialidad_2(self.especialidades, especialidad_especifica)
-                            for especialidad in self.especialidades:
-                                if especialidad.especialidad==especialidad_especifica:
-                                    print(especialidad.get_precio)
+                            # for especialidad in self.especialidades:
+                            #     if especialidad.especialidad==especialidad_especifica:
+                            #         print(especialidad.get_precio)
                         elif int(opcion_6)==3:
                             mostrar_deuda_ordenada(self.socios)
                         elif int(opcion_6)==4:
