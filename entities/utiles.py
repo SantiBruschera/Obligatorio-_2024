@@ -23,6 +23,7 @@ def verificar_precio(precio):
             while not precio.isdigit() or int(precio)<=0:
                 print("El precio de la especialidad es incorrecto, ingréselo nuevamente")
                 precio = str(input("Precio: "))
+            return precio
 
 
 #2. Dar de alta un socio
@@ -94,7 +95,7 @@ def verificar_especialidad_2(especialidades, especialidad_dada):
                 especialidad_dada = input('Especialidad: ')
             elif opcion == 2:
                 precio = input('Precio: ')
-                verificar_precio(precio)
+                precio= verificar_precio(precio)
                 e=Especialidad(especialidad_dada, precio)
                 especialidades.append(e)
                 break
@@ -134,20 +135,20 @@ def verificar_nombre_completo_medico(nombre_completo, medicos, especialidades):
             if opcion == 1:
                 nombre_completo= input('Medico: ')
             elif opcion == 2:
-                nombre=input('nombre: ')
-                verificar_nombre(nombre)
-                apellido=input('apellido: ')
-                verificar_apellido(apellido)
-                cedula=input('cedula: ')
-                verificar_cedula(cedula)
-                fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
-                verificar_fecha_nac(fecha_nac)
-                fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
-                verificar_fecha_ing(fecha_ing)
-                num_celular=input('numero de ceulular: ')
-                verificar_celular(num_celular)
-                especialidad=input('especialidad: ')
-                verificar_especialidad_2(especialidades, especialidad)
+                nombre= input('nombre: ')
+                nombre= verificar_nombre(nombre)
+                apellido= input('apellido: ')
+                apellido= verificar_apellido(apellido)
+                cedula= input('cedula: ')
+                cedula= verificar_cedula(cedula)
+                fecha_nac= input('fecha de nacimiento en formato aaaa-mm-dd: ')
+                fecha_nac= verificar_fecha_nac(fecha_nac)
+                fecha_ing= input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
+                fecha_ing= verificar_fecha_ing(fecha_ing)
+                num_celular= input('numero de ceulular: ')
+                num_celular= verificar_celular(num_celular)
+                especialidad= input('especialidad: ')
+                especialidad= verificar_especialidad_2(especialidades, especialidad)
                 m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
                 medicos.append(m)
         except ValueError:
@@ -172,21 +173,21 @@ def verificar_medico( medico_dado, medicos, especialidades):
             if opcion == 1:
                 medico_dado= input('Medico: ')
             elif opcion == 2:
-                nombre=input('nombre: ')
-                verificar_nombre(nombre)
-                apellido=input('apellido: ')
-                verificar_apellido(apellido)
-                cedula=input('cedula: ')
-                verificar_cedula(cedula)
-                fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
-                verificar_fecha_nac(fecha_nac)
-                fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
-                verificar_fecha_ing(fecha_ing)
-                num_celular=input('numero de ceulular: ')
-                verificar_celular(num_celular)
-                especialidad=input('especialidad: ')
-                verificar_especialidad_2(especialidades, especialidad)
-                m=Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
+                nombre= input('nombre: ')
+                nombre= verificar_nombre(nombre)
+                apellido= input('apellido: ')
+                apellido= verificar_apellido(apellido)
+                cedula= input('cedula: ')
+                cedula= verificar_cedula(cedula)
+                fecha_nac= input('fecha de nacimiento en formato aaaa-mm-dd: ')
+                fecha_nac= verificar_fecha_nac(fecha_nac)
+                fecha_ing= input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
+                fecha_ing= verificar_fecha_ing(fecha_ing)
+                num_celular= input('numero de ceulular: ')
+                num_celular= verificar_celular(num_celular)
+                especialidad= input('especialidad: ')
+                especialidad= verificar_especialidad_2(especialidades, especialidad)
+                m= Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
                 medicos.append(m)
         except ValueError:
                 print("Por favor, ingrese un número válido.")
@@ -199,17 +200,16 @@ def buscar_medico(medico_i, medicos):
 
 
 def verificar_cantidad_max(cantidad_max):
-    while True:
-        if not cantidad_max.isdigit() or int(cantidad_max)<0:
-            print("La cantidad maxima no puede ser cero o menor, ingréselo nuevamente")
-            cantidad_max = str(input("Cantidad máxima: "))
-        else:
-            break
+    while not cantidad_max.isdigit() or int(cantidad_max)<0:
+        print("La cantidad maxima no puede ser cero o menor, ingréselo nuevamente")
+        cantidad_max = str(input("Cantidad máxima: "))
+    return cantidad_max
 
 def verificar_fecha_consulta(fecha_consulta):
     while not es_fecha_valida(fecha_consulta):
         print("No es una fecha válida, vuelva a ingresarla en el formato aaaa-mm-dd.")
         fecha_consulta = input("Ingrese la fecha de consulta en formato aaaa-mm-dd: ")
+    return fecha_consulta
 
 
 #5. Emitir un ticket de consulta (verificar nombre especialidad, verificar especialidad)
@@ -232,37 +232,39 @@ def elegir_consulta(nombre, fecha, especialidad, consultas):
 
 
 def verificar_cedula_in_socio(cedula, socios):
-    for socio in socios:
-        este=False
-        if cedula == socio.get_cedula:
-            este=True
-    if este==False:
-        opcion=0
-        while opcion not in [1,2]:
-            opcion=input('Este socio no está dado de alta, elija una opción:\n'
-            '- 1 - Volver a ingresar el socio \n'
-            '- 2 - Dar de alta el socio')
-            if opcion==1:
-                cedula=input("socio: ")
-            elif opcion==2:
-                nombre=input('nombre: ')
-                verificar_nombre(nombre)
-                apellido=input('apellido: ')
-                verificar_apellido(apellido)
-                cedula=input('cedula: ')
-                verificar_cedula(cedula)
-                fecha_nac=input('fecha de nacimiento en formato aaaa-mm-dd: ')
-                verificar_fecha_nac(fecha_nac)
-                fecha_ing=input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
-                verificar_fecha_ing(fecha_ing)
-                num_celular=input('numero de ceulular: ')
-                verificar_celular(num_celular)
-                tipo=input('tipo de socio, bonificado(1) o no bonificado(2)')
-                verificar_tipo_socio(tipo)
-                s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo)
-                socios.append(s)
-    else: 
-        return cedula
+    este=False
+    opcion=0
+    while True:
+        for socio in socios:
+            if int(cedula) == int(socio.get_cedula):
+                este=True
+        if este==False:
+            if opcion !=1 or opcion!=2:
+                opcion=input('Este socio no está dado de alta, elija una opción:\n'
+                '- 1 - Volver a ingresar el socio \n'
+                '- 2 - Dar de alta el socio')
+                if int(opcion)==1:
+                    cedula=input("cedula: ")
+                    opcion=1
+                elif int(opcion)==2:
+                    nombre= input('nombre: ')
+                    nombre= verificar_nombre(nombre)
+                    apellido= input('apellido: ')
+                    apellido= verificar_apellido(apellido)
+                    cedula= input('cedula: ')
+                    cedula = verificar_cedula(cedula)
+                    fecha_nac= input('fecha de nacimiento en formato aaaa-mm-dd: ')
+                    fecha_nac= verificar_fecha_nac(fecha_nac)
+                    fecha_ing= input('fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
+                    fecha_ing= verificar_fecha_ing(fecha_ing)
+                    num_celular=input('numero de ceulular: ')
+                    num_celular= verificar_celular(num_celular)
+                    tipo= input('tipo de socio, bonificado(1) o no bonificado(2)')
+                    tipo= verificar_tipo_socio(tipo)
+                    s=Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo)
+                    socios.append(s)
+        else: 
+            return cedula
 
 def agregar_deuda(cedula, especialidad_1, especialidades, socios):
     for socio in socios:
