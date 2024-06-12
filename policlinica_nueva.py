@@ -25,6 +25,7 @@ from entities.utiles import cant_consultas_entre_fechas
 from entities.utiles import ganancias_entre_fechas
 from entities.utiles import verificar_nombre_completo_medico
 from entities.utiles import mostrar_consultas
+from exceptions.No_existe import NoExiste
 
 
 class Policlinica():
@@ -124,19 +125,27 @@ class Policlinica():
                     especialidad= str(input('Ingrese la especialidad: '))
                     especialidad= verificar_nombre_especialidad(especialidad)
                     especialidad= verificar_especialidad_2(self.especialidades, especialidad)
-                    a= mostrar_consultas(self.consultas, especialidad)
-                    opcion_i= input('Seleccione la opción deseada ')
-                    opcion_i=verificar_opcion(a, opcion_i)
-                    medico_select, fecha_select=a[int(opcion_i)-1]
-                    consulta_sel=elegir_consulta(medico_select,fecha_select, especialidad, self.consultas)
-                    print(f'los turnos libres son: {consulta_sel.turnos_libres}')
-                    numero= int(input('Seleccionar el número de atención deseado ')) 
-                    numero= verificar_numero(numero, consulta_sel.turnos_libres)
-                    cedula= int(input('Ingrese la cédula de identidad del socio: '))
-                    cedula= verificar_cedula(cedula, self.socios)
-                    cedula= verificar_cedula_in_socio(cedula, self.socios)
-                    agregar_deuda(cedula, especialidad, self.especialidades, self.socios)
-                    consulta_sel.eliminar_numero(numero)
+                    es_valido = True
+                    #if no hay medicos en esp que haga algo/
+                    try:
+                        a= mostrar_consultas(self.consultas, especialidad)
+                    except NoExiste:
+                        print('No hay medicos asosciados a la especialidad')
+                        es_valido = False
+                        continue
+                    if es_valido:
+                        opcion_i= input('Seleccione la opción deseada ')
+                        opcion_i=verificar_opcion(a, opcion_i)
+                        medico_select, fecha_select=a[int(opcion_i)-1]
+                        consulta_sel=elegir_consulta(medico_select,fecha_select, especialidad, self.consultas)
+                        print(f'los turnos libres son: {consulta_sel.turnos_libres}')
+                        numero= int(input('Seleccionar el número de atención deseado ')) 
+                        numero= verificar_numero(numero, consulta_sel.turnos_libres)
+                        cedula= int(input('Ingrese la cédula de identidad del socio: '))
+                        cedula= verificar_cedula(cedula, self.socios)
+                        cedula= verificar_cedula_in_socio(cedula, self.socios)
+                        agregar_deuda(cedula, especialidad, self.especialidades, self.socios)
+                        consulta_sel.eliminar_numero(numero)
 
                 elif opcion == 6:
                     while True:

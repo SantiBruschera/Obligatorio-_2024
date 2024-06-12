@@ -4,6 +4,7 @@ from entities.medico_dos import Medico
 from entities.consulta_medica import ConsultaMedica
 from entities.socio_dos import Socio
 from entities.persona_dos import Persona
+from exceptions.No_existe import NoExiste
 
 def es_fecha_valida(fecha_str):#utiliza datetime para fijarse que sea una fecha valida
         try:
@@ -95,7 +96,7 @@ def verificar_especialidad_2(especialidades, especialidad_dada):
             if opcion == 1:
                 especialidad_dada = input()
             elif opcion == 2:
-                precio = input()
+                precio = input("Ingrese el precio asociado: ")
                 precio= verificar_precio(precio)
                 e=Especialidad(especialidad_dada, precio)
                 especialidades.append(e)
@@ -221,6 +222,8 @@ def mostrar_consultas(consultas, especialidad):
             print(f"{n} - Doctor:{consulta.get_nombre_medico}  Dia de la consulta: {consulta.get_fecha_consulta}")
             lista.append((consulta.get_nombre_medico, consulta.get_fecha_consulta))
             n+=1
+    if lista==[]:
+        raise NoExiste()
     return lista
 
 def elegir_consulta(nombre, fecha, especialidad, consultas):
@@ -327,3 +330,6 @@ def verificar_numero(numero, lista):
     while numero not in lista:
         numero=int(input(('el numero no esta disponible')))
     return numero
+
+def no_hay_especialidad(especialidad, especialdiades):
+    pass

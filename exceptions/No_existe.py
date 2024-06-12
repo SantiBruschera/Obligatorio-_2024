@@ -1,0 +1,2 @@
+class NoExiste(Exception):
+    pass
