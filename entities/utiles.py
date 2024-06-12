@@ -310,5 +310,10 @@ def ganancias_entre_fechas(fecha_inicio, fecha_final, socios, especialidades, co
 
 def verificar_opcion(lista, numero):
     while int(numero)>len(lista):
-        numreo=input('opcion no valida ')
+        numero=input('opcion no valida ')
+    return numero
+
+def verificar_numero(numero, lista):
+    while numero not in lista:
+        numero=int(input(('el numero no esta disponible')))
     return numero

@@ -2,7 +2,7 @@ from entities.socio_dos import Socio
 from entities.medico_dos import Medico
 from entities.especialidad_dos import Especialidad
 from entities.consulta_medica import ConsultaMedica
-from entities.utiles import verificar_cantidad_max, verificar_opcion
+from entities.utiles import verificar_cantidad_max, verificar_numero, verificar_opcion
 from entities.utiles import verificar_fecha_consulta
 from entities.utiles import verificar_tipo_socio
 from entities.utiles import verificar_precio
@@ -28,7 +28,7 @@ from entities.utiles import mostrar_consultas
 
 
 class Policlinica():
-    def __init__(self): #los arrayssiempre tienen que ir como constructores, dentro del init. Tenemos que hacerles getters y setters. Arreglar lo que nos dijo flor de que escribiamos mal los getters y setters. Y hacer lo de socios bonificados y no bonificados. 
+    def __init__(self): 
         self.medicos = [] 
         self.socios = [] 
         self.especialidades = []
@@ -126,19 +126,17 @@ class Policlinica():
                     especialidad= verificar_especialidad_2(self.especialidades, especialidad)
                     a= mostrar_consultas(self.consultas, especialidad)
                     opcion_i= input('Seleccione la opción deseada ')
-                    #validad que el input este enre 1 y el largo de la lista
                     opcion_i=verificar_opcion(a, opcion_i)
-
                     medico_select, fecha_select=a[int(opcion_i)-1]
                     consulta_sel=elegir_consulta(medico_select,fecha_select, especialidad, self.consultas)
                     print(f'los turnos libres son: {consulta_sel.turnos_libres}')
-                    numero= int(input('Seleccionar el número de atención deseado ')) #hacer verificacion 
+                    numero= int(input('Seleccionar el número de atención deseado ')) 
+                    numero= verificar_numero(numero, consulta_sel.turnos_libres)
                     cedula= int(input('Ingrese la cédula de identidad del socio: '))
                     cedula= verificar_cedula(cedula)
                     cedula= verificar_cedula_in_socio(cedula, self.socios)
                     agregar_deuda(cedula, especialidad, self.especialidades, self.socios)
                     consulta_sel.eliminar_numero(numero)
-                    #validar (usando in o not in)
                     
                     
 
