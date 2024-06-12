@@ -36,9 +36,16 @@ def verificar_apellido(apellido):
         apellido = input("No es un apellido válido, ingréselo de nuevo.")
     return apellido
 
-def verificar_cedula(cedula):
+def verificar_cedula(cedula, personas):
     while not str(cedula).isdigit() or len(str(cedula)) != 8:
         cedula = input("No es una cédula válida, ingrese nuevamente una cédula de 8 dígitos.")
+    esta=True
+    while esta==True:
+        esta=False
+        for persona in personas:
+            if persona.get_cedula==cedula:
+                esta=True
+                cedula=input('esta cedula ya esta dada de alta ')
     return cedula
 
 def verificar_fecha_nac(fecha_nac):
@@ -46,9 +53,12 @@ def verificar_fecha_nac(fecha_nac):
         fecha_nac = input("No es una fecha válida, vuelva a ingresarla en el formato aaaa-mm-dd.")
     return fecha_nac
 
-def verificar_fecha_ing(fecha_ing):
+def verificar_fecha_ing(fecha_ing, fecha_nac):
     while not es_fecha_valida(fecha_ing):
         fecha_ing = input("Ingrese la fecha de ingreso a la institución en formato aaaa-mm-dd: ")
+    
+    while not fecha_ing >= fecha_nac:
+        fecha_ing = input("La fecha ingresada es inválida ")
     return fecha_ing
 
 def verificar_celular(celular):

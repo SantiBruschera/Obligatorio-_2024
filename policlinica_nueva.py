@@ -67,11 +67,11 @@ class Policlinica():
                     apellido= input('Ingrese el apellido: ')
                     apellido= verificar_apellido(apellido)
                     cedula= input('Ingrese la cédula de identidad: ')
-                    cedula= verificar_cedula(cedula)
+                    cedula= verificar_cedula(cedula, self.socios)
                     fecha_nac= input('Ingrese la fecha de nacimiento en formato aaaa-mm-dd: ')
                     fecha_nac = verificar_fecha_nac(fecha_nac)
                     fecha_ing= input('Ingrese la fecha de ingreso a la institución en formato aaaa-mm-dd: ')
-                    fecha_ing = verificar_fecha_ing(fecha_ing)
+                    fecha_ing = verificar_fecha_ing(fecha_ing, fecha_nac)
                     num_celular= input('Ingrese el número de celular: ')
                     num_celular = verificar_celular(num_celular)
                     tipo= input('Ingrese el tipo de socio: 1- Bonificado 2- No bonificado ')
@@ -88,11 +88,11 @@ class Policlinica():
                     apellido= input('Ingrese el apellido: ')
                     apellido = verificar_apellido(apellido)
                     cedula= input('Ingrese la cédula de identidad: ')
-                    cedula= verificar_cedula(cedula)
+                    cedula= verificar_cedula(cedula, self.medicos)
                     fecha_nac= input('Ingrese la fecha de nacimiento en formato aaaa-mm-dd: ')
                     fecha_nac= verificar_fecha_nac(fecha_nac)
                     fecha_ing= input('Ingrese la fecha de ingreso a la institucion en formato aaaa-mm-dd: ')
-                    fecha_ing= verificar_fecha_ing(fecha_ing)
+                    fecha_ing= verificar_fecha_ing(fecha_ing, fecha_nac)
                     num_celular= input('Ingrese el número de celular: ')
                     num_celular= verificar_celular(num_celular)
                     especialidad= input('Ingrese la especialidad: ')
@@ -133,12 +133,10 @@ class Policlinica():
                     numero= int(input('Seleccionar el número de atención deseado ')) 
                     numero= verificar_numero(numero, consulta_sel.turnos_libres)
                     cedula= int(input('Ingrese la cédula de identidad del socio: '))
-                    cedula= verificar_cedula(cedula)
+                    cedula= verificar_cedula(cedula, self.socios)
                     cedula= verificar_cedula_in_socio(cedula, self.socios)
                     agregar_deuda(cedula, especialidad, self.especialidades, self.socios)
                     consulta_sel.eliminar_numero(numero)
-                    
-                    
 
                 elif opcion == 6:
                     while True:
