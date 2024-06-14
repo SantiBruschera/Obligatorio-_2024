@@ -58,9 +58,6 @@ class Policlinica():
                     e= Especialidad(especialidad, precio)
                     self.especialidades.append(e)
                     print('La especialidad se ha creado con éxito')
-                    for especialidad in self.especialidades:
-                        print(especialidad.especialidad)
-                        print(especialidad.get_precio)
 
                 elif opcion == 2:
                     nombre= input('Ingrese el nombre: ')
@@ -79,9 +76,6 @@ class Policlinica():
                     tipo= verificar_tipo_socio(tipo)
                     s= Socio(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, tipo, 0)
                     self.socios.append(s)
-                    for socio in self.socios:
-                        print (socio.get_nombre)
-                        print(socio.get_tipo)
     
                 elif opcion == 3:
                     nombre= input('Ingrese el nombre: ')
@@ -100,9 +94,7 @@ class Policlinica():
                     especialidad= verificar_especialidad_2(self.especialidades, especialidad)
                     m= Medico(nombre, apellido, cedula, fecha_nac, fecha_ing, num_celular, especialidad)
                     self.medicos.append(m)
-                    for medico in self.medicos:
-                        print(medico.get_nombre)
-                        print(medico.get_especialidad)
+
 
                 elif opcion == 4:
                     nombre_especialidad= input('Ingrese la especialidad: ')
@@ -117,16 +109,13 @@ class Policlinica():
                     cant_pacientes=verificar_cantidad_max(cant_pacientes)
                     consulta= ConsultaMedica(nombre_especialidad, nombre_medico, fecha_consulta, cant_pacientes)
                     self.consultas.append(consulta)
-                    for consulta in self.consultas:
-                        print(consulta.get_nombre_especialidad)
-                        print(consulta.get_nombre_medico)
+
 
                 elif opcion == 5:
                     especialidad= str(input('Ingrese la especialidad: '))
                     especialidad= verificar_nombre_especialidad(especialidad)
                     especialidad= verificar_especialidad_2(self.especialidades, especialidad)
                     es_valido = True
-                    #if no hay medicos en esp que haga algo/
                     try:
                         a= mostrar_consultas(self.consultas, especialidad)
                     except NoExiste:
@@ -159,7 +148,6 @@ class Policlinica():
                             especialidad_especifica= input('Especialidad especifica: ')
                             especialidad_especifica= verificar_nombre_especialidad(especialidad_especifica)
                             especialidad_especifica= verificar_especialidad_2(self.especialidades, especialidad_especifica)
-                            #si doy de alta una especialidad se termina el programa, va al menu principal, o vuelve a las 5 opciones?
                             for medico in self.medicos:
                                 if medico.get_especialidad==especialidad_especifica:
                                     print(medico.get_nombre, medico.get_apellido)
